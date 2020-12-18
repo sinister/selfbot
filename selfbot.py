@@ -33,7 +33,7 @@ async def clear(ctx):
     async for message in channel.history(limit=None).filter(lambda m: m.author == client.user).map(lambda m: m):
         try:
             await message.delete()
-            await asyncio.sleep(1)
+            #await asyncio.sleep(1) # uncomment to avoid rate limit
         except:
             pass
 
