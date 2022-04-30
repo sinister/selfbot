@@ -15,6 +15,7 @@ async def on_connect():
     print('selfbot is ready')
     if not presence_set:
         global presence_set
+        # Sets selfbot presence to invisible and AFK so mobile notifications are still received and you appear offline when you close Discord
         await client.change_presence(status='invisible', afk=True)
         presence_set = True
 
@@ -30,7 +31,7 @@ clears your messages
 """
 @client.command()
 async def clear(ctx):
-    async for message in channel.history(limit=None).filter(lambda m: m.author == client.user).map(lambda m: m):
+    async for message in ctx.channel.history(limit=None).filter(lambda m: m.author == client.user).map(lambda m: m):
         try:
             await message.delete()
             #await asyncio.sleep(1) # uncomment to avoid rate limit
